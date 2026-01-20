@@ -17,7 +17,7 @@ fun main() {
 
     //Задача 2
     println("Задача 2")
-    i = 0
+    i = 0 //Непонятно для чего это присваивание
     for(i in 1..5){
         when {
             i<=3 -> println("Тест $i: В процессе")
@@ -38,6 +38,19 @@ fun main() {
 }
 
 fun testsComplexity(duration:Int, complexity:Int):String {
+    
+    // У нас when имеет возвращаемое значение, поэтому лучше в return возращать сразу то что определяется в when
+    //В задании не указано конкретно, но в случае если не удалось определить тип теста, то лучше выводить понятное описание, а не просто error
+    //Если ты решила выводить префикс для каждого случая и он одинаков, лучше сохранять его в константу
+    //val prefix = "duration $duration , complexity $complexity : "
+    // return when {
+    //     duration<10 -> "$prefix Быстрый тест"
+    //     (duration in 10..30) and (complexity in 1..3) -> "$prefix Стандартный тест"
+    //     (duration in 10..30) and (complexity in 4..5) -> "$prefix Сложный тест"
+    //     duration>30 -> "$prefix Длительный тест"
+    //     else -> "Не удалось определить тип теста для длительности $duration и сложности $complexity"
+    // }
+    
     when {
         duration<10 -> return "duration $duration , complexity $complexity : Быстрый тест"
         (duration in 10..30) and (complexity in 1..3) -> return "duration $duration , complexity $complexity : Стандартный тест"
