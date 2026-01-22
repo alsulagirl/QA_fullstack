@@ -16,6 +16,7 @@ fun main() {
 
     //Задача 2
     val isValidPhone = { testPhone: String ->
+        //contains просто вхождение проверяет, нам в начале смотерть
         testPhone.contains("+7") && testPhone.substring(2)
             .all { it.isDigit() } && (testPhone.count { it.isDigit() } == 11)
     }
