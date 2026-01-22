@@ -6,7 +6,7 @@ fun main() {
 
     //Задача 1
     val testNumber: Array<Int> = arrayOf(0, 1, -1)
-
+    //Круглые скобки в определении лямбды лишние
     val isPositive: (Int) -> Boolean = ({ number -> number > 0 })
 
     for (currentNumberValue in testNumber) {
