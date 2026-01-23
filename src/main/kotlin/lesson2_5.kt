@@ -6,8 +6,8 @@ fun main() {
 
     //Задача 1
     val testNumber: Array<Int> = arrayOf(0, 1, -1)
-    //Круглые скобки в определении лямбды лишние
-    val isPositive: (Int) -> Boolean = ({ number -> number > 0 })
+    //Круглые скобки в определении лямбды лишние - поправила
+    val isPositive: (Int) -> Boolean = { number -> number > 0 }
 
     for (currentNumberValue in testNumber) {
         logTestStart()
@@ -16,8 +16,8 @@ fun main() {
 
     //Задача 2
     val isValidPhone = { testPhone: String ->
-        //contains просто вхождение проверяет, нам в начале смотерть
-        testPhone.contains("+7") && testPhone.substring(2)
+        //contains просто вхождение проверяет, нам в начале смотерть - поправила
+        testPhone.substring(0,2).equals("+7") && testPhone.substring(2)
             .all { it.isDigit() } && (testPhone.count { it.isDigit() } == 11)
     }
 
