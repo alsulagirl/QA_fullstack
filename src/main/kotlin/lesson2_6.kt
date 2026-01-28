@@ -30,11 +30,12 @@ fun main() {
         ),
         "total" to 3
     )
-    val activeItems = (apiResponse["data"]  as? List<Map<String, Any>>)
-        ?.filter { it["status"] == "active" }
 
-        println("Активные пользователи: ${(activeItems?.filter { it.contains("id") })}}")
-        println("Активных пользователей : ${(activeItems?.filter { it.contains("id") })?.size}")
+    val activeUsers = (apiResponse["data"] as List<Map<*,*>>).filter { it["status"] == "active" }
+
+    println("Активные пользователи: ${activeUsers.map { it["id"] }}")
+    println("Активных пользователей : ${activeUsers.count()}")
+
 
 }
 
