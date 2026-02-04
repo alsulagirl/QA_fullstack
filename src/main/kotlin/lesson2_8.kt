@@ -12,7 +12,7 @@ fun <T> validateField(checkField: T?): Boolean {
 }
 
 //Задача 2
-fun countElements(items: List<*>): Int {
+fun <T> countElements(items: List<T>): Int {
     return items.size
 }
 
