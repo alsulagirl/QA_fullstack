@@ -5,12 +5,9 @@ class Field<T>(var item: T)
 
 //Задача 1
 fun <T> validateField(checkField: T?): Boolean {
-    //если у тебя всего две ветки в when, то лучше как раз использовать if
-    //return if (checkFiled is String) checkField.isBlank() else checkField == null
-    when (checkField) {
-        is String -> return checkField.isBlank()
-        else -> return (checkField == null)
-    }
+    if (checkField is String) {
+        return checkField.isBlank()
+    } else return (checkField == null)
 }
 
 //Задача 2
@@ -20,11 +17,12 @@ fun <T> countElements(items: List<T>): Int {
 
 //Задача 3
 //Обобщенный класс Basket
-class Basket<T>(/** Т.к. у нас есть методы для работы с  этим полес, то само поле лучше сделать приватным, сошласно принципу инкапсуляции */ var items: MutableList<T>) {
+//Сделать приватным
+class Basket<T>(/** Т.к. у нас есть методы для работы с  этим полес, то само поле лучше сделать приватным, сошласно принципу инкапсуляции */
+                /**тогда ломаются функции-расширения из-за приватности поля */ var items: MutableList<T>) {
 
     fun addItem(newItem: T) {
-        //Зачем использовать добавление с последним индексов? add(newItem) и так добавит в конец списка
-        items.add(items.lastIndex, newItem)
+        items.add(newItem)
     }
 
     fun getAllItems(): List<T> {
@@ -40,17 +38,11 @@ interface Valuable {
     val value: Int
 }
 
-/**
-* Функция написана верно, но обычно при несложных ограничения на дженерик where не используют и указываею его в самом дженерике
-* fun <T: Weighable> Basket<T>.totalWeight(): Double {
-*     return items.sumOf { it.weight }
-* }
-*/
-fun <T> Basket<T>.totalWeight(): Double where T : Weighable {
+fun <T: Weighable> Basket<T>.totalWeight(): Double {
     return items.sumOf { it.weight }
 }
 
-fun <T> Basket<T>.totalValue(): Int where T : Valuable{
+fun <T : Valuable> Basket<T>.totalValue(): Int  {
     return items.sumOf { it.value }
 }
 
@@ -59,10 +51,11 @@ fun main() {
     //Задача 1
     println("\nЗадача 1")
     /** Не очень понял назначение класса Field чтоб он список хранил, можно же просто создать список Any? элементов и нанём проверить работу функции */
+    //Сначала так и реализовывала, но тема была про дженерики - решила упражняться
     val field = Field(listOf("", 1, null, "1", true))
-    /** Цикл for можно конечно использовать, но лучше сразу привыкать к более читабельным .foreach{...} */
-    for (i in field.item) {
-        println("$i is null or empty? : ${validateField(i)} ")
+
+    field.item.forEach{ element ->
+        println("$element is null or empty? : ${validateField(element)} ")
     }
 
     //Задача 2
@@ -90,3 +83,4 @@ fun main() {
 
 
 }
+
